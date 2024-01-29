@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Fractal trees</title>
+</head>
+<body>
+  <div class="container">
+    <canvas id="canvas" width="1000" height="800"></canvas>
+    <div class="controls">
+      <div class="controls__item">
+        <label for="angle">Angle</label>
+        <input type="range" id="angle" min="0" max="100" value="45">
+      </div>
+      <div class="controls__item">
+        <label for="length">Length</label>
+        <input type="range" id="length" min="0" max="200" value="100">
+      </div>
+      <div class="controls__item">
+        <label for="depth">Depth</label>
+        <input type="range" id="depth" min="0" max="10" value="5">
+      </div>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>
