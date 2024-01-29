@@ -1,30 +1,30 @@
-let canvas = document.getElementById('canvas');
-let ctx = canvas.getContext('2d');
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
 const LEN = 180;
 let rotateAngle = 0.8;
 let branchLength = 0.67;
 let maxDepth = 10;
 ctx.lineWidth = 2;
-ctx.strokeStyle = '#fff';
+ctx.strokeStyle = "#fff";
 
-let angle = document.getElementById('angle');
-let length = document.getElementById('length');
-let depth = document.getElementById('depth');
+let angle = document.getElementById("angle");
+let length = document.getElementById("length");
+let depth = document.getElementById("depth");
 
-angle.addEventListener('input', () => {
+angle.addEventListener("input", () => {
   rotateAngle = angle.value / 100;
   drawTree();
 });
 
-length.addEventListener('input', () => {
+length.addEventListener("input", () => {
   branchLength = length.value / 100;
   drawTree();
-})
+});
 
-depth.addEventListener('input', () => {
+depth.addEventListener("input", () => {
   maxDepth = depth.value;
   drawTree();
-})
+});
 
 function branch(len, depth = 0) {
   ctx.beginPath();
@@ -32,7 +32,7 @@ function branch(len, depth = 0) {
   ctx.lineTo(0, -len);
   ctx.stroke();
 
-  if(len < 4 || depth > maxDepth) {
+  if (len < 4 || depth > maxDepth) {
     return;
   }
 
@@ -58,5 +58,3 @@ function drawTree() {
   branch(LEN);
   ctx.restore();
 }
-
-
