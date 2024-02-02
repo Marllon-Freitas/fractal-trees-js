@@ -1,10 +1,12 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
-const LEN = 180;
+
+const lengthOfTheLine = 200;
 let rotateAngle = 0.8;
 let branchLength = 0.67;
-let maxDepth = 10;
-ctx.lineWidth = 2;
+let maxDepth = 12;
+
+ctx.lineWidth = 1;
 ctx.strokeStyle = "#fff";
 
 let angle = document.getElementById("angle");
@@ -26,27 +28,30 @@ depth.addEventListener("input", () => {
   drawTree();
 });
 
-function branch(len, depth = 0) {
+function drawnLine(len) {
   ctx.beginPath();
   ctx.moveTo(0, 0);
   ctx.lineTo(0, -len);
   ctx.stroke();
+}
 
+function drawnBranchWithAngle(len, angle, depth) {
+  ctx.save();
+  ctx.rotate(angle);
+  branch(len * branchLength, depth + 1);
+  ctx.restore();
+}
+
+function branch(len, depth = 0) {
+  drawnLine(len);
   if (len < 4 || depth > maxDepth) {
     return;
   }
 
   ctx.translate(0, -len);
 
-  ctx.save();
-  ctx.rotate(-rotateAngle);
-  branch(len * branchLength, depth + 1);
-  ctx.restore();
-
-  ctx.save();
-  ctx.rotate(rotateAngle);
-  branch(len * branchLength, depth + 1);
-  ctx.restore();
+  drawnBranchWithAngle(len, -rotateAngle, depth);
+  drawnBranchWithAngle(len, rotateAngle, depth);
 
   ctx.translate(0, len);
 }
@@ -55,6 +60,8 @@ function drawTree() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.save();
   ctx.translate(canvas.width / 2, canvas.height);
-  branch(LEN);
+  branch(lengthOfTheLine)
   ctx.restore();
 }
+
+drawTree();
